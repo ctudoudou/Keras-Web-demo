@@ -1,0 +1,4 @@
+Django==2.0.4
+Keras==2.1.5
+tensorflow==1.7.0
+Image==1.5.20
