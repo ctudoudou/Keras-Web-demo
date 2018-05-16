@@ -8,17 +8,17 @@
 
 之前开发过一个Web网站，需要对上传的图片进行深度学习预测，使用的是Keras作为项目的深度学习后端，前端使用的是Django。本以为分别开发完成Web程式和Keras的学习预测模块之后拼到一起就可以了，鬼知道tensorflow会报错啊？！还报的那么恶心的错误！！！！
 
-部分代码![img1](/Users/tudoudou/Desktop/Keras-Web-demo/image/img1.png)
+部分代码![img1](./image/img1.png)
 
 报的错误截图
 
-![img2](/Users/tudoudou/Desktop/Keras-Web-demo/image/img2.png)
+![img2](./image/img2.png)
 
 ```
 Tensor Tensor("dense_2/Softmax:0", shape=(?, 10), dtype=float32) is not an element of this graph.
 ```
 
-这是什么鬼啊！第一次看到这个的错误时一脸懵逼![img3](/Users/tudoudou/Desktop/Keras-Web-demo/image/img3.jpg)
+这是什么鬼啊！第一次看到这个的错误时一脸懵逼![img3](./image/img3.jpg)
 
 好吧，深究原因，是因为Tensorflow的运行机制正好和Web有冲突，Tensorflow在后端做预测时是将“图”导入到内存中，之后对图进行计算返回结果，正常情况下这样执行完成之后，程序就Kill掉了，但是由于这里有Web服务，所以那个“图”的计算并没有Kill掉，在第二次执行时，“图”再次被导入计算，由于同时出现了两张一样的“图”，程式就分不清楚哪个是哪个的元素了，于是乎就产生了这样的问题。(PS: 以上一本正经的胡说八道)
 
@@ -49,13 +49,13 @@ with graph.as_default():
 
 部分代码
 
-![img6](/Users/tudoudou/Desktop/Keras-Web-demo/image/img6.png)
+![img6](./image/img6.png)
 
-上传图片操作![img5](/Users/tudoudou/Desktop/Keras-Web-demo/image/img5.png)
+上传图片操作![img5](./image/img5.png)
 
 页面比较简约，嗯，就是这样。运行结果
 
-![img4](/Users/tudoudou/Desktop/Keras-Web-demo/image/img4.png)
+![img4](./image/img4.png)
 
 连续上传两次，我们可以看见预测时间超级快的说。
 
